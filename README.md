@@ -2,6 +2,11 @@
   <img src="https://github.com/user-attachments/assets/2c692b73-755c-4822-bd3f-c08d723adeb5" ">
   <h1>CleanMyMacbook</h1>
   <p><b>A powerful, deep system cleaner designed for advanced users.</b></p>
+   <a href="https://github.com/chadi0x/CleanMyMacbook/releases/latest">
+    <img src="https://img.shields.io/badge/Download_CleanMyMacbook-V1.0.0-blue?style=for-the-badge&logo=apple" alt="Download Release"/>
+  </a>
+  <br/><br/>
+
   <a href="https://ko-fi.com/chadi0x">
   <img src="https://storage.ko-fi.com/cdn/kofi2.png?v=3" height="40" alt="Support Me on Ko-fi">
   </a>
