@@ -17,7 +17,25 @@
 
 The traditional "macOS Maintenance" market is a monopoly. Companies charge recurring $80/year subscriptions for apps that perform basic system cleanups. That ends today.
 
-CleanMyMacbook is a completely free, highly advanced System Auditing Dashboard. It doesn't just clean caches—it exposes hidden operations running on your machine.
+CleanMyMacbook is a completely free, highly advanced System Auditing Dashboard. It doesn't just clean caches—it exposes hidden operations running on your machine natively.
+
+---
+
+## ⚡ Apple Silicon (M1/M2/M3) Support
+
+Developing natively across architectures requires deep cross-compiling hardware that I simply don't have. I only use and test on Intel (x64) hardware natively.
+
+Building, verifying, and packaging the **Apple Silicon (ARM64)** version of CleanMyMacbook organically required renting cloud computing infrastructure and massive architectural adjustments. If you are running a modern M-Series processor and want the 100% native, ultra-fast Silicon build of this application, you can purchase the proprietary **Silicon ARM `.dmg` version exclusively on my Ko-Fi Store below!**
+
+<br/>
+<div align="center">
+  <a href="https://ko-fi.com/chadi0x">
+    <img src="https://img.shields.io/badge/Get_Apple_Silicon_Version-Ko--Fi-FF5E5B?style=for-the-badge&logo=kofi" alt="Ko-fi ARM Version"/>
+  </a>
+</div>
+<br/>
+
+*The standard Intel (x64) build attached to the releases tab below remains 100% free.*
 
 ---
 
