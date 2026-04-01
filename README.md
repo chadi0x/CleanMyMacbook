@@ -38,6 +38,8 @@ Building, verifying, and packaging the **Apple Silicon (ARM64)** version of Clea
 *The standard Intel (x64) build attached to the releases tab below remains 100% free.*
 
 ---
+## Screenshot 
+<img width="1188" height="779" alt="Screenshot 2026-03-31 at 20 32 26" src="https://github.com/user-attachments/assets/7af57f9d-06e0-4722-a87d-3a0531668eda" />
 
 ## The Features Competitors Won't Build
 
