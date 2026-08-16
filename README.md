@@ -20,8 +20,10 @@
 The traditional "macOS Maintenance" market is a monopoly. Corporate utility apps charge recurring $80/year subscriptions for software that performs basic system cleanups. That ends today.
 
 **CleanMyMacbook** is a completely free, native-feeling macOS Sequoia optimization and security suite. Built with high-performance Electron, React 19, and Vite, it delivers advanced system auditing, developer cache purging, app uninstallation, process authority signatures, and live menu bar monitoring in an obsidian dark glassmorphism interface.
+<img width="1244" height="823" alt="Screenshot 2026-08-16 at 22 29 20" src="https://github.com/user-attachments/assets/4aefb4af-13dd-4bce-9907-69794bf95fdb" />
 
 ---
+
 
 ## ⚡ Apple Silicon (M1/M2/M3/M4) Support
 
@@ -65,11 +67,9 @@ I didn't stop at emptying the trash. CleanMyMacbook provides genuine system inte
 - **Dynamic Telemetry Status**: Sits directly in the macOS top status bar displaying live `⚡ RAM X% | DISK Y%` with 3-second background polling.
 - **Sequoia Glass Popover Sheet**: Interactive Control-Center style popover with live memory/disk gauges, CPU hardware details, and 1-click RAM Purge actions.
 
-### ⌨️ Modern UX & Productivity
+### ⌨️ Productivity
 - **Command Palette (`⌘K`)**: Instant search and task launcher.
 - **Hotkeys**: `⌘1`–`⌘9` tab navigation shortcuts and `Esc` dismiss handlers.
-- **Obsidian Glass Design System**: Layered backdrop blur (`blur(45px)`), depth shadows, and electric pink/purple neon lighting.
-
 ---
 
 ## 📥 Installation
