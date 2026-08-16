@@ -1,0 +1,61 @@
+{
+  "name": "cleanmymacbook",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A commercial-grade system cleaning, security and optimization suite for macOS Sequoia",
+  "author": "Chadi0x",
+  "type": "module",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "concurrently -k \"vite\" \"npm run electron:dev\"",
+    "electron:dev": "wait-on tcp:5173 && cross-env NODE_ENV=development electron .",
+    "build": "vite build && electron-builder",
+    "build:intel": "vite build && electron-builder --mac dmg --x64",
+    "build:arm": "vite build && electron-builder --mac dmg --arm64",
+    "build:universal": "vite build && electron-builder --mac dmg --universal",
+    "lint": "eslint .",
+    "preview": "vite preview"
+  },
+  "build": {
+    "appId": "com.antigravity.cleanmymacbook",
+    "productName": "CleanMyMacbook",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "mac": {
+      "target": ["dmg", "zip"],
+      "icon": "build/icon.icns",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false
+    },
+    "dmg": {
+      "icon": "build/icon.icns"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*"
+    ]
+  },
+  "dependencies": {
+    "lucide-react": "^1.7.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-window": "^2.2.7"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "electron": "^41.1.0",
+    "electron-builder": "^26.8.1",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.4.0",
+    "vite": "^8.0.1",
+    "wait-on": "^9.0.4"
+  }
+}

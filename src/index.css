@@ -1,0 +1,481 @@
+/* ==========================================================================
+   CleanMyMacbook - macOS Sequoia Commercial Design System & Layout Architecture
+   ========================================================================== */
+
+:root {
+  /* Color Palette - Obsidian Dark Glassmorphism */
+  --bg-dark: #08060c;
+  --bg-gradient: radial-gradient(circle at 15% 15%, rgba(255, 0, 127, 0.18) 0%, transparent 45%),
+                 radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.18) 0%, transparent 50%),
+                 radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.12) 0%, transparent 60%);
+                 
+  --glass-bg: rgba(18, 14, 28, 0.72);
+  --glass-bg-hover: rgba(28, 22, 42, 0.82);
+  --glass-sidebar: rgba(12, 9, 20, 0.65);
+  --glass-card: rgba(255, 255, 255, 0.035);
+  --glass-card-hover: rgba(255, 255, 255, 0.08);
+  --glass-card-active: rgba(255, 255, 255, 0.12);
+  --glass-input: rgba(0, 0, 0, 0.5);
+  
+  --border-light: rgba(255, 255, 255, 0.09);
+  --border-highlight: rgba(255, 255, 255, 0.16);
+  --border-accent: rgba(255, 0, 127, 0.35);
+  
+  /* Text colors */
+  --text-primary: #ffffff;
+  --text-secondary: #a39eb8;
+  --text-muted: #6e6982;
+  --text-glow: rgba(255, 255, 255, 0.95);
+  
+  /* Accents */
+  --accent-pink: #ff007f;
+  --accent-pink-hover: #ff2a93;
+  --accent-purple: #8b5cf6;
+  --accent-cyan: #06b6d4;
+  --accent-emerald: #10b981;
+  --accent-amber: #f59e0b;
+  --accent-rose: #ef4444;
+  
+  --accent-gradient: linear-gradient(135deg, #ff007f 0%, #8b5cf6 100%);
+  --accent-gradient-hover: linear-gradient(135deg, #ff2a93 0%, #a78bfa 100%);
+  --accent-gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  --accent-gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --accent-gradient-kofi: linear-gradient(135deg, #00b9fe 0%, #0088cc 100%);
+  
+  --pink-glow: 0 0 25px rgba(255, 0, 127, 0.45);
+  --purple-glow: 0 0 25px rgba(139, 92, 246, 0.45);
+  --cyan-glow: 0 0 25px rgba(6, 182, 212, 0.45);
+  --emerald-glow: 0 0 25px rgba(16, 185, 129, 0.45);
+  --danger-glow: 0 0 25px rgba(239, 68, 68, 0.45);
+  
+  /* Shadows & Depth */
+  --shadow-window: 0 30px 90px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  --shadow-panel: 0 20px 50px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.18);
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  --shadow-button: 0 8px 24px rgba(255, 0, 127, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.45);
+  
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+  --font-mono: "SF Mono", Menlo, Monaco, Consolas, monospace;
+}
+
+/* Global Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+}
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  position: relative;
+}
+
+/* Dynamic Ambient Glow Mesh */
+body::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: var(--bg-gradient);
+  animation: mesh-rotate 45s ease-in-out infinite alternate;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes mesh-rotate {
+  0% { transform: scale(1) rotate(0deg) translate(0, 0); }
+  50% { transform: scale(1.1) rotate(3deg) translate(2%, -2%); }
+  100% { transform: scale(1) rotate(-3deg) translate(-2%, 2%); }
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Draggable macOS Header Bar Region */
+.drag-region {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 38px;
+  -webkit-app-region: drag;
+  z-index: 900;
+  pointer-events: auto;
+}
+
+.no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* ==========================================================================
+   Layout Architecture Fixes
+   ========================================================================== */
+
+/* Main App Container - STRICT COLUMN FLEX */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg-dark);
+}
+
+/* Main Body below HeaderBar - STRICT ROW FLEX */
+.app-body {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  width: 100%;
+  height: calc(100vh - 48px);
+  overflow: hidden;
+}
+
+/* Sequoia Translucent Glass Panels */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(45px) saturate(190%);
+  -webkit-backdrop-filter: blur(45px) saturate(190%);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-panel);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+}
+
+.glass-card {
+  background: var(--glass-card);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-card);
+  border-radius: 16px;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: var(--glass-card-hover);
+  border-color: var(--border-highlight);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+}
+
+/* Main Content Workspace */
+.main-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  padding: 14px 16px 16px 14px;
+}
+
+.view-viewport {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  padding: 24px 28px;
+  gap: 16px;
+}
+
+/* ==========================================================================
+   Typography & Hierarchy
+   ========================================================================== */
+
+h1.view-title {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #ffffff 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.15;
+}
+
+p.view-subtitle {
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  line-height: 1.5;
+  font-weight: 450;
+  max-width: 720px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Buttons & Interactive Control System
+   ========================================================================== */
+
+.btn {
+  font-family: var(--font-sans);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 99px;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: scale(0.97) !important;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--accent-pink);
+  outline-offset: 3px;
+}
+
+/* Primary Action Button */
+.btn-primary {
+  background: var(--accent-gradient);
+  color: #ffffff;
+  box-shadow: var(--shadow-button);
+}
+
+.btn-primary:hover {
+  background: var(--accent-gradient-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(255, 0, 127, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Danger Button */
+.btn-danger {
+  background: var(--accent-gradient-danger);
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(239, 68, 68, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Ko-Fi Support Button */
+.btn-kofi {
+  background: var(--accent-gradient-kofi);
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 185, 254, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.btn-kofi:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(0, 185, 254, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Secondary / Outline Button */
+.btn-outline {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06);
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: var(--border-highlight);
+  transform: translateY(-2px);
+}
+
+/* Search & Filter Inputs */
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.search-input-wrapper svg {
+  position: absolute;
+  left: 14px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 9px 16px 9px 40px;
+  border-radius: 12px;
+  background: var(--glass-input);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.search-input:focus {
+  border-color: var(--accent-pink);
+  box-shadow: 0 0 0 3px rgba(255, 0, 127, 0.18);
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Custom Glass Checkbox */
+.custom-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 6px;
+  border: 1px solid var(--border-highlight);
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  outline: none;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.custom-checkbox:hover {
+  border-color: var(--accent-pink);
+  background: rgba(255, 0, 127, 0.12);
+}
+
+.custom-checkbox:checked {
+  background: var(--accent-pink);
+  border-color: var(--accent-pink);
+  box-shadow: 0 0 12px rgba(255, 0, 127, 0.45);
+}
+
+.custom-checkbox:checked::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Animations */
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px) scale(0.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Monospace Pill */
+.mono-text {
+  font-family: var(--font-mono);
+}
+
+/* Status Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.badge-verified {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #10b981;
+}
+
+.badge-warning {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #f59e0b;
+}
+
+.badge-danger {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #ef4444;
+}
+
+.badge-info {
+  background: rgba(6, 182, 212, 0.15);
+  border: 1px solid rgba(6, 182, 212, 0.35);
+  color: #06b6d4;
+}
